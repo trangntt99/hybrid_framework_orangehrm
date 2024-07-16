@@ -2,20 +2,13 @@ package commons;
 
 import org.openqa.selenium.WebDriver;
 
-import pageObjects.user.HomePageObject;
-import pageUIs.user.BaseElementUI;
+import pageUIs.BaseElementUI;
 
 public class BaseElement extends BasePage {
 	WebDriver driver;
 
 	public BaseElement(WebDriver driver) {
 		this.driver = driver;
-	}
-
-	public HomePageObject clickToNopCommerceLogo() {
-		waitForElementClickable(driver, BaseElementUI.NOPCOMMERCE_LOGO);
-		clickToElement(driver, BaseElementUI.NOPCOMMERCE_LOGO);
-		return PageGeneratorManager.getHomePage(driver);
 	}
 	
 	public void clickToHeaderLinkByName(String pageName) {

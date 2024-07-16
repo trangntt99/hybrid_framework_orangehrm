@@ -1,4 +1,4 @@
-package pageUIs.user;
+package pageUIs;
 
 public class BaseElementUI {
 	public static final String NOPCOMMERCE_LOGO = "xpath=//div[@class='header-logo']//img";
