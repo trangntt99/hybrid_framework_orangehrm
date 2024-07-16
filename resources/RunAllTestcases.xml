@@ -14,7 +14,7 @@
 		</classes>
 	</test>
 	
-	<test name="Run on Chrome" preserve-order="true">
+	<!--<test name="Run on Chrome" preserve-order="true">
 		<parameter name="browser" value="chrome" />
 		<classes>
 			<class name="com.orangehrm.pim.PIM_01_Employee" />
@@ -26,6 +26,6 @@
 		<classes>
 			<class name="com.orangehrm.pim.PIM_01_Employee" />
 		</classes>
-	</test>
+	</test>-->
 
 </suite>
