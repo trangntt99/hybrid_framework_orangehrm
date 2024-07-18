@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
+import commons.GlobalConstants;
 import commons.PageGeneratorManager;
 import pageObjects.AddEmployeePageObject;
 import pageObjects.ContactDetailsPageObject;
@@ -28,17 +29,18 @@ public class PIM_01_Employee extends BaseTest {
 	private EmployeeListPageObject employeeListPage;
 	private AddEmployeePageObject addEmployeePage;
 	private PersonalDetailsPageObject personalDetailsPage;
-	private ContactDetailsPageObject contactDetailsPage;
 
 	@Parameters({"url", "browser"})
 	@BeforeClass
 	public void beforeClass(String url, String browserName) {
 		driver = getBrowserDriver(browserName, url);
 		this.browserName = browserName;
+		firstName = "Michael";
+		lastName = "Owen";
 		
 		loginPage = PageGeneratorManager.getLoginPage(driver);
-		loginPage.enterToUsernameTextbox("automationfc");
-		loginPage.enterToPasswordTextbox("<s362guQO9J1");
+		loginPage.enterToUsernameTextbox(GlobalConstants.ADMIN_USERNAME);
+		loginPage.enterToPasswordTextbox(GlobalConstants.ADMIN_PASSWORD);
 		dashboardPage = loginPage.clickToLoginButton();
 
 		employeeListPage = dashboardPage.openPIMModule();
@@ -48,30 +50,33 @@ public class PIM_01_Employee extends BaseTest {
 	public void Employee_01_Add_New(Method method) {
 		ExtentTestManager.startTest(method.getName() + " - Run on " + browserName.toUpperCase(), "Employee_01_Add_New");
 		addEmployeePage = employeeListPage.clickToAddEmployeeButton();
-		addEmployeePage.enterToFirstNameTextbox("");
-		addEmployeePage.enterToLastNameTextbox("");
+		addEmployeePage.enterToFirstNameTextbox(firstName);
+		addEmployeePage.enterToLastNameTextbox(lastName);
 		employeeID = addEmployeePage.getEmployeeID();
 		addEmployeePage.clickToSaveButton();
-		addEmployeePage.isSuccessMessageDisplayed("Successfully Saved");
-		// //p[contains(@class, 'oxd-text--toast-message') and text()='Successfully Saved']
-		
+
+		Assert.assertTrue(addEmployeePage.isSuccessMessageDisplayed("Successfully Saved"));
+		addEmployeePage.waitForSpinnerIconInvisible();
+
 		personalDetailsPage =  PageGeneratorManager.getPersonalDetailsPage(driver);
+		Assert.assertTrue(personalDetailsPage.isPersonalDetailsHeaderDisplayed());
+		personalDetailsPage.waitForSpinnerIconInvisible();
 	}
 	
 	@Test
 	public void Employee_02_Personal_Details(Method method) {
 		ExtentTestManager.startTest(method.getName() + " - Run on " + browserName.toUpperCase(), "Employee_02_Personal_Details");
-		Assert.assertEquals(personalDetailsPage.getFirstNameValue(), "");
-		Assert.assertEquals(personalDetailsPage.getLastNameValue(), "");
+		Assert.assertEquals(personalDetailsPage.getFirstNameValue(), firstName);
+		Assert.assertEquals(personalDetailsPage.getLastNameValue(), lastName);
 		Assert.assertEquals(personalDetailsPage.getEmployeeIDValue(), employeeID);
 		
 		employeeListPage = personalDetailsPage.clickToEmployeeListButton();
 		
 		employeeListPage.enterToEmployeeIDTextbox(employeeID);
 		employeeListPage.clickToSearchButton();
-		Assert.assertTrue(employeeListPage.isValueDisplayedAtColumnName("Id", employeeID));
-		Assert.assertTrue(employeeListPage.isValueDisplayedAtColumnName("First (& Middle) Name", ""));
-		Assert.assertTrue(employeeListPage.isValueDisplayedAtColumnName("Last Name", ""));
+		Assert.assertTrue(employeeListPage.isValueDisplayedAtColumnName("Id", "1", employeeID));
+		Assert.assertTrue(employeeListPage.isValueDisplayedAtColumnName("First (& Middle) Name", "1", firstName));
+		Assert.assertTrue(employeeListPage.isValueDisplayedAtColumnName("Last Name", "1", lastName));
 	}
 	
 	@Test

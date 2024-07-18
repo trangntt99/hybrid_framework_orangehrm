@@ -11,16 +11,16 @@ public class ExtentManager {
 
 	public synchronized static ExtentReports createExtentReports() {
 		ExtentSparkReporter reporter = new ExtentSparkReporter(GlobalConstants.RELATIVE_PROJECT_PATH + "/extentReport/HTMLReportVersion5.html");
-		reporter.config().setReportName("NopCommerce HTML Report");
-		reporter.config().setDocumentTitle("NopCommerce HTML Report");
+		reporter.config().setReportName("OrangeHRM HTML Report");
+		reporter.config().setDocumentTitle("OrangeHRM HTML Report");
 		reporter.config().setTimelineEnabled(true);
 		reporter.config().setEncoding("utf-8");
 		reporter.config().setTheme(Theme.DARK);
 
 		extentReports.attachReporter(reporter);
 		extentReports.setSystemInfo("Company", "Automation FC");
-		extentReports.setSystemInfo("Project", "Nop Commerce");
-		extentReports.setSystemInfo("Team", "NopCommerce Automation Testing Team");
+		extentReports.setSystemInfo("Project", "OrangeHRM");
+		extentReports.setSystemInfo("Team", "OrangeHRM Automation Testing Team");
 		extentReports.setSystemInfo("JDK version", GlobalConstants.JAVA_VERSION);
 		return extentReports;
 	}

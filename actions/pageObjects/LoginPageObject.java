@@ -2,26 +2,31 @@ package pageObjects;
 
 import org.openqa.selenium.WebDriver;
 
-import commons.BasePage;
+import commons.BaseActions;
+import commons.PageGeneratorManager;
+import pageUIs.LoginPageUI;
 
-public class LoginPageObject extends BasePage {
+public class LoginPageObject extends BaseActions {
 	private WebDriver driver;
 	
 	public LoginPageObject(WebDriver driver) {
+		super(driver);
 		this.driver = driver;
 	}
 
-	public void enterToUsernameTextbox(String string) {
-		waitForElementVisible(driver, string);
+	public void enterToUsernameTextbox(String username) {
+		waitForElementVisible(driver, LoginPageUI.USERNAME_TEXTBOX);
+		sendkeyToElement(driver, LoginPageUI.USERNAME_TEXTBOX, username);
 	}
 
-	public void enterToPasswordTextbox(String string) {
-		// TODO Auto-generated method stub
-		
+	public void enterToPasswordTextbox(String password) {
+		waitForElementVisible(driver, LoginPageUI.PASSWORD_TEXTBOX);
+		sendkeyToElement(driver, LoginPageUI.PASSWORD_TEXTBOX, password);
 	}
 
 	public DashboardPageObject clickToLoginButton() {
-		// TODO Auto-generated method stub
-		return null;
+		waitForElementClickable(driver, LoginPageUI.LOGIN_BUTTON);
+		clickToElement(driver, LoginPageUI.LOGIN_BUTTON);
+		return PageGeneratorManager.getDashboardPage(driver);
 	}
 }

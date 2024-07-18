@@ -2,42 +2,34 @@ package pageObjects;
 
 import org.openqa.selenium.WebDriver;
 
-import commons.BasePage;
+import commons.BaseActions;
+import pageUIs.AddEmployeePageUI;
 
-public class AddEmployeePageObject extends BasePage {
+public class AddEmployeePageObject extends BaseActions {
 	private WebDriver driver;
 	
 	public AddEmployeePageObject(WebDriver driver) {
+		super(driver);
 		this.driver = driver;
 	}
 
-	public void enterToFirstNameTextbox(String string) {
-		// TODO Auto-generated method stub
-		
+	public void enterToFirstNameTextbox(String firstName) {
+		waitForElementVisible(driver, AddEmployeePageUI.FIRSTNAME_TEXTBOX);
+		sendkeyToElement(driver, AddEmployeePageUI.FIRSTNAME_TEXTBOX, firstName);
 	}
 
-	public void enterToLastNameTextbox(String string) {
-		// TODO Auto-generated method stub
-		
+	public void enterToLastNameTextbox(String lastName) {
+		waitForElementVisible(driver, AddEmployeePageUI.LASTNAME_TEXTBOX);
+		sendkeyToElement(driver, AddEmployeePageUI.LASTNAME_TEXTBOX, lastName);
 	}
 
 	public String getEmployeeID() {
-		// TODO Auto-generated method stub
-		return null;
+		waitForElementVisible(driver, AddEmployeePageUI.EMPLOYEE_ID_TEXTBOX);
+		return getElementAttribute(driver, AddEmployeePageUI.EMPLOYEE_ID_TEXTBOX, "value");
 	}
 
-	public PersonalDetailsPageObject clickToSaveButton() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void isSuccessSavedMessageDisplayed() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void isSuccessMessageDisplayed(String string) {
-		// TODO Auto-generated method stub
-		
+	public void clickToSaveButton() {
+		waitForElementClickable(driver, AddEmployeePageUI.SAVE_BUTTON);
+		clickToElement(driver, AddEmployeePageUI.SAVE_BUTTON);
 	}
 }

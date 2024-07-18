@@ -20,6 +20,8 @@ public class GlobalConstants {
 	public static final long LONG_TIMEOUT = 30;
 	public static final String DEV_ADMIN_USERNAME = "admin@yourstore.com";
 	public static final String DEV_ADMIN_PASSWORD = "admin";
+	public static final String ADMIN_USERNAME = "automationfc";
+	public static final String ADMIN_PASSWORD = "<s362guQO9J1";
 	public static final String OS_NAME = System.getProperty("os.name");
 	public static final String JAVA_VERSION = System.getProperty("java.version");
 	public static final String RELATIVE_PROJECT_PATH = System.getProperty("user.dir");

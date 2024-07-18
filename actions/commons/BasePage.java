@@ -18,7 +18,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pageUIs.BaseElementUI;
+import pageUIs.BaseActionsPageUI;
 
 public class BasePage {
 	public static BasePage getBasePage() {
@@ -474,7 +474,7 @@ public class BasePage {
 			fullFileName = fullFileName + filePath + file + "\n";
 		}
 		fullFileName = fullFileName.trim();
-		getWebElement(driver, BaseElementUI.UPLOAD_FILE_TYPE).sendKeys(fullFileName);
+		getWebElement(driver, BaseActionsPageUI.UPLOAD_FILE_TYPE).sendKeys(fullFileName);
 	}
 
 	private long longTimeout = GlobalConstants.LONG_TIMEOUT;
