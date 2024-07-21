@@ -28,6 +28,7 @@ public class PIM_01_Employee extends BaseTest {
 	private EmployeeListPageObject employeeListPage;
 	private AddEmployeePageObject addEmployeePage;
 	private PersonalDetailsPageObject personalDetailsPage;
+	private ContactDetailsPageObject contactDetailsPage;
 
 	@Parameters({ "url", "browser" })
 	@BeforeClass
@@ -49,6 +50,13 @@ public class PIM_01_Employee extends BaseTest {
 		bloodType = "A";
 		imgName = "bg1.jpg";
 		comment = "Upload file";
+		street1 = "E VERNON AVE";
+		city = "LOS ANGELES";
+		province = "CA";
+		postalCode = "90001";
+		country = "United States";
+		mobile = "+1386002062";
+		workEmail = getEmailRandom();
 
 		loginPage = PageGeneratorManager.getLoginPage(driver);
 		loginPage.enterToUsernameTextbox(GlobalConstants.ADMIN_USERNAME);
@@ -110,10 +118,10 @@ public class PIM_01_Employee extends BaseTest {
 		personalDetailsPage.clickToRadioButtonByLabelName(genderStatus);
 		personalDetailsPage.clickToCheckboxByLabelName(smokerStatus);
 		personalDetailsPage.clickToSaveButtonAtPersonalDetailsPart();
-		
+
 		Assert.assertTrue(personalDetailsPage.isSuccessMessageDisplayed("Successfully Updated"));
 		personalDetailsPage.waitForSpinnerIconInvisible();
-		
+
 		Assert.assertEquals(personalDetailsPage.getNicknameValue(), nickName);
 		Assert.assertEquals(personalDetailsPage.getDriverLicenseNumberValue(), driverLicenseNumber);
 		Assert.assertEquals(personalDetailsPage.getLicenseExpiryDateValue(), licenseExpiryDate);
@@ -124,12 +132,12 @@ public class PIM_01_Employee extends BaseTest {
 		Assert.assertEquals(personalDetailsPage.getDateOfBirthValue(), dateOfBirth);
 		Assert.assertTrue(personalDetailsPage.isRadioButtonSelectedByLabelName(genderStatus));
 		Assert.assertTrue(personalDetailsPage.isCheckboxSelectedByLabelName(smokerStatus));
-		
+
 		personalDetailsPage.selectToBloodTypeDropdown(bloodType);
 		personalDetailsPage.clickToSaveButtonAtCustomFieldsPart();
 		Assert.assertTrue(personalDetailsPage.isSuccessMessageDisplayed("Successfully Saved"));
 		personalDetailsPage.waitForSpinnerIconInvisible();
-		
+
 		personalDetailsPage.clickToAddButton();
 		personalDetailsPage.uploadFile(imgName);
 		personalDetailsPage.enterToCommentTextbox(comment);
@@ -138,15 +146,56 @@ public class PIM_01_Employee extends BaseTest {
 		personalDetailsPage.waitForSpinnerIconInvisible();
 
 		int totalOfRecords = personalDetailsPage.getTotalNumberOfRowsInTable();
-		Assert.assertTrue(personalDetailsPage.isValueDisplayedAtColumnName("File Name", String.valueOf(totalOfRecords), imgName));
-		Assert.assertTrue(personalDetailsPage.isValueDisplayedAtColumnName("Description", String.valueOf(totalOfRecords), comment));
-		Assert.assertTrue(personalDetailsPage.isValueDisplayedAtColumnName("Added By", String.valueOf(totalOfRecords), GlobalConstants.ADMIN_USERNAME));
+		Assert.assertTrue(
+				personalDetailsPage.isValueDisplayedAtColumnName("File Name", String.valueOf(totalOfRecords), imgName));
+		Assert.assertTrue(personalDetailsPage.isValueDisplayedAtColumnName("Description",
+				String.valueOf(totalOfRecords), comment));
+		Assert.assertTrue(personalDetailsPage.isValueDisplayedAtColumnName("Added By", String.valueOf(totalOfRecords),
+				GlobalConstants.ADMIN_USERNAME));
 	}
 
 	@Test
 	public void Employee_03_Contact_Details(Method method) {
 		ExtentTestManager.startTest(method.getName() + " - Run on " + browserName.toUpperCase(),
 				"Employee_03_Contact_Details");
+
+		contactDetailsPage = personalDetailsPage.clickToContactDetailsButton();
+		Assert.assertTrue(contactDetailsPage.isPersonalDetailsHeaderDisplayed());
+		
+		contactDetailsPage.enterToStreet1Textbox(street1);
+		contactDetailsPage.enterToCityTextbox(city);
+		contactDetailsPage.enterToProvinceTextbox(province);
+		contactDetailsPage.enterToPostalCodeTextbox(postalCode);
+		contactDetailsPage.selectToCountryDropdown(country);
+		contactDetailsPage.enterToMobileTextbox(mobile);
+		contactDetailsPage.enterToWorkEmailTextbox(workEmail);
+		contactDetailsPage.clickToSaveButtonAtContactDetailsPart();
+
+		Assert.assertTrue(contactDetailsPage.isSuccessMessageDisplayed("Successfully Updated"));
+		contactDetailsPage.waitForSpinnerIconInvisible();
+
+		Assert.assertEquals(contactDetailsPage.getStreet1Value(), street1);
+		Assert.assertEquals(contactDetailsPage.getCityValue(), city);
+		Assert.assertEquals(contactDetailsPage.getProvinceValue(), province);
+		Assert.assertEquals(contactDetailsPage.getPostalCodeValue(), postalCode);
+		Assert.assertEquals(contactDetailsPage.getCountryValue(), country);
+		Assert.assertEquals(contactDetailsPage.getMobileValue(), mobile);
+		Assert.assertEquals(contactDetailsPage.getWorkEmailValue(), workEmail);
+
+		contactDetailsPage.clickToAddButton();
+		contactDetailsPage.uploadFile(imgName);
+		contactDetailsPage.enterToCommentTextbox(comment);
+		contactDetailsPage.clickToSaveButtonAtAttachmentsPart();
+		Assert.assertTrue(contactDetailsPage.isSuccessMessageDisplayed("Successfully Saved"));
+		contactDetailsPage.waitForSpinnerIconInvisible();
+
+		int totalOfRecords = contactDetailsPage.getTotalNumberOfRowsInTable();
+		Assert.assertTrue(
+				contactDetailsPage.isValueDisplayedAtColumnName("File Name", String.valueOf(totalOfRecords), imgName));
+		Assert.assertTrue(contactDetailsPage.isValueDisplayedAtColumnName("Description", String.valueOf(totalOfRecords),
+				comment));
+		Assert.assertTrue(contactDetailsPage.isValueDisplayedAtColumnName("Added By", String.valueOf(totalOfRecords),
+				GlobalConstants.ADMIN_USERNAME));
 	}
 
 	@Test
@@ -196,4 +245,5 @@ public class PIM_01_Employee extends BaseTest {
 	private String browserName, employeeID, firstName, lastName, nickName;
 	private String driverLicenseNumber, licenseExpiryDate, ssnNumber, sinNumber, nationality, maritalSatus;
 	private String dateOfBirth, genderStatus, smokerStatus, bloodType, imgName, comment;
+	private String street1, city, province, postalCode, country, mobile, workEmail;
 }

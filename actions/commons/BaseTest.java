@@ -82,7 +82,7 @@ public class BaseTest {
 	}
 	
 	protected String getEmailRandom() {
-		return "john" + new Random().nextInt(99999) + "@kennedy.us";
+		return "michael" + new Random().nextInt(99999) + "@kennedy.us";
 	}
 	
 	protected void closeBrowserDriver() {

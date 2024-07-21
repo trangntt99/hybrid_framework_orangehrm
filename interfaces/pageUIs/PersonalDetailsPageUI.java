@@ -29,4 +29,6 @@ public class PersonalDetailsPageUI {
 	public static final String COMMENT_TEXTAREA = "xpath=//label[text()='Comment']/parent::div/following-sibling::div/textarea";
 	public static final String SAVE_BUTTON_AT_ATTACHMENT = "xpath=//div[contains(@class,'orangehrm-attachment')]//button[contains(string(),'Save')]";
 	public static final String TOTAL_NUMBER_OF_ROWS_IN_TABLE = "xpath=//div[@class='oxd-table']/div[@class='oxd-table-body']/div";
+
+	public static final String CONTACT_DETAILS_BUTTON = "xpath=//a[text()='Contact Details']";
 }

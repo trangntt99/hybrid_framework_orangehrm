@@ -154,4 +154,11 @@ public class PersonalDetailsPageObject extends BaseActions {
 	public int getTotalNumberOfRowsInTable() {
 		return getListElementSize(driver, PersonalDetailsPageUI.TOTAL_NUMBER_OF_ROWS_IN_TABLE);
 	}
+
+	public ContactDetailsPageObject clickToContactDetailsButton() {
+		waitForElementClickable(driver, PersonalDetailsPageUI.CONTACT_DETAILS_BUTTON);
+		clickToElement(driver, PersonalDetailsPageUI.CONTACT_DETAILS_BUTTON);
+		waitForSpinnerIconInvisible();
+		return PageGeneratorManager.getContactDetailsPage(driver);
+	}
 }
