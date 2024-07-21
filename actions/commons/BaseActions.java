@@ -26,4 +26,26 @@ public class BaseActions extends BasePage {
 		int columnIndex = getListElementSize(driver, BaseActionsPageUI.DYNAMIC_INDEX_BY_COLUMN_NAME, columnName) + 1;
 		return isElementDisplayed(driver, BaseActionsPageUI.DYNAMIC_INDEX_BY_COLUMN_INDEX_ROW_INDEX, rowIndex, String.valueOf(columnIndex), rowValue);
 	}
+
+	public void clickToRadioButtonByLabelName(String radioLabelName) {
+		clickToElementByJS(driver, BaseActionsPageUI.DYNAMIC_RADIO_BUTTON_BY_LABEL_NAME, radioLabelName);
+	}
+
+	public void clickToCheckboxByLabelName(String checkboxLabelName) {
+		if (!isElementSelected(driver, BaseActionsPageUI.DYNAMIC_CHECKBOX_BY_LABEL_NAME, checkboxLabelName)) {
+			clickToElementByJS(driver, BaseActionsPageUI.DYNAMIC_CHECKBOX_BY_LABEL_NAME, checkboxLabelName);
+		}
+	}
+
+	public boolean isRadioButtonSelectedByLabelName(String radioLabelName) {
+		return isElementSelected(driver, BaseActionsPageUI.DYNAMIC_RADIO_BUTTON_BY_LABEL_NAME, radioLabelName);
+	}
+
+	public boolean isCheckboxSelectedByLabelName(String checkboxLabelName) {
+		return isElementSelected(driver, BaseActionsPageUI.DYNAMIC_RADIO_BUTTON_BY_LABEL_NAME, checkboxLabelName);
+	}
+
+	public void uploadFile(String imgName) {
+		uploadMultipleFiles(driver, imgName);
+	}
 }

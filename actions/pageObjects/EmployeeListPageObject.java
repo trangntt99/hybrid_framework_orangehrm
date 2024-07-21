@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 
 import commons.BaseActions;
 import commons.PageGeneratorManager;
-import pageUIs.AddEmployeePageUI;
 import pageUIs.EmployeeListPageUI;
 
 public class EmployeeListPageObject extends BaseActions {
@@ -31,5 +30,12 @@ public class EmployeeListPageObject extends BaseActions {
 		waitForElementClickable(driver, EmployeeListPageUI.SEARCH_BUTTON);
 		clickToElement(driver, EmployeeListPageUI.SEARCH_BUTTON);
 		waitForSpinnerIconInvisible();
+	}
+
+	public PersonalDetailsPageObject clickToEditIconByEmployeeID(String employeeID) {
+		waitForElementClickable(driver, EmployeeListPageUI.EDIT_ICON_BY_EMPLOYEE_ID, employeeID);
+		clickToElement(driver, EmployeeListPageUI.EDIT_ICON_BY_EMPLOYEE_ID, employeeID);
+		waitForSpinnerIconInvisible();
+		return PageGeneratorManager.getPersonalDetailsPage(driver);
 	}
 }
